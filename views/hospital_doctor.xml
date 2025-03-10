@@ -74,6 +74,8 @@
                 <field name="email"/>
                 <field name="specialization"/>
                 <field name="mobile"/>
+                <field name="currency_id"/>
+                <field name="retail_price"/>
             </tree>
         </field>
     </record>
