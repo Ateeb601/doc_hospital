@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_patient">
+        <t t-call="web.external_layout">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+
+                    <h2 style="text-align: left; font-weight: bold;">Patient Card</h2>
+
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-6"><strong>Name:</strong> <t t-esc="doc.name"/></div>
+                            <div class="col-6"><strong>Age:</strong> <t t-esc="doc.age"/></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6"><strong>Gender:</strong> <t t-esc="doc.gender"/></div>
+                            <div class="col-6"><strong>Date of Birth:</strong> <t t-esc="doc.dob"/></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6"><strong>Email:</strong> <t t-esc="doc.email"/></div>
+                            <div class="col-6"><strong>Phone:</strong> <t t-esc="doc.mobile"/></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12"><strong>Amount:</strong> <t t-esc="doc.amount"/></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12"><strong>Address:</strong> <t t-esc="doc.address"/></div>
+                        </div>
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

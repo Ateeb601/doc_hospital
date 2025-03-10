@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_doctor">
+        <t t-call="web.external_layout">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+
+                    <h1 style="text-align: center; font-weight: bold; color: white; background-color: #ADD8E6; padding: 10px; border-radius: 5px;">Doctor Card</h1>
+
+                    <div class="page">
+                        <table class="table table-bordered" style="width: 100%; border-collapse: collapse; font-weight:bold; color: black; background-color: silver">
+
+                            <!-- Doctor Basic Information -->
+                            <tr>
+                                <td style="padding: 5px;"><strong>Reference Number:</strong> <t t-esc="doc.ref or 'N/A'"/></td>
+                                <td style="padding: 5px;"><strong>Doctor:</strong> <t t-esc="doc.name"/></td>
+                                <td style="padding: 5px;"><strong>Gender:</strong> <t t-esc="doc.gender or 'N/A'"/></td>
+                            </tr>
+
+                            <!-- Contact Information -->
+                            <tr>
+                                <td><strong>Email:</strong> <t t-esc="doc.email or 'N/A'"/></td>
+                                <td><strong>Phone:</strong> <t t-esc="doc.mobile or 'N/A'"/></td>
+                            </tr>
+
+                            <!-- Additional Fields -->
+                            <tr>
+                                <td><strong>Date of Birth:</strong> <t t-esc="doc.dob or 'N/A'"/></td>
+                                <td><strong>Age:</strong> <t t-esc="doc.age or 'N/A'"/></td>
+                                <td><strong>Doctor Type:</strong> <t t-esc="doc.doctor_type or 'N/A'"/></td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Specialization:</strong> <t t-esc="doc.specialization.name if doc.specialization else 'N/A'"/></td>
+                                <td><strong>Currency:</strong> <t t-esc="doc.currency_id.name if doc.currency_id else 'N/A'"/></td>
+                                <td><strong>Charges:</strong> <t t-esc="doc.retail_price or '0.00'"/></td>
+                            </tr>
+
+                            <!-- Supervisor and Supervised Doctors -->
+                            <tr>
+                                <td><strong>Supervisor:</strong> <t t-esc="doc.parent_id.name if doc.parent_id else 'N/A'"/></td>
+                                <td colspan="2">
+                                    <strong>Supervised Doctors:</strong>
+                                    <t t-if="doc.child_ids">
+                                        <t t-set="child_names" t-value="[child.name for child in doc.child_ids]"/>
+                                        <t t-esc="', '.join(child_names)"/>
+                                    </t>
+                                    <t t-if="not doc.child_ids">N/A</t>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div> <!-- Closing .page div -->
+
+                </t> <!-- Closing t-foreach -->
+            </t>
+        </t>
+    </template>
+</odoo>

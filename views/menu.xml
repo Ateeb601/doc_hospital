@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu for Hospital -->
+    <menuitem id="menu_hospital_main" name="Hospital" sequence="1"/>
+
+    <!-- Operations Submenu -->
+    <menuitem id="menu_hospital_operations"
+              name="Operations"
+              parent="menu_hospital_main"
+              sequence="10"/>
+
+    <!-- Lab Submenu -->
+    <menuitem id="menu_hospital_lab"
+              name="Lab"
+              parent="menu_hospital_main"
+              sequence="20"/>
+
+
+</odoo>

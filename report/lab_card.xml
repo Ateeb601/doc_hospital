@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_lab">
+        <t t-call="web.external_layout">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+
+                    <h1 style="text-align: center; font-weight: bold; color: white; background-color: #ADD8E6; padding: 10px; border-radius: 5px;">Lab Report Card</h1>
+
+                    <div class="page">
+                        <table class="table table-bordered" style="width: 100%; border-collapse: collapse; font-weight:bold; color: black; background-color: silver">
+
+                            <!-- Reference Number first, then Lab Name -->
+                            <tr>
+                                <td style="padding: 5px;"><strong>Reference Number:</strong> <t t-esc="doc.ref or 'N/A'"/></td>
+                                <td style="padding: 5px;"><strong>Lab Name:</strong> <t t-esc="doc.name"/></td>
+                            </tr>
+
+                            <!-- Test Name (Full-Width) -->
+                            <t t-if="doc.test_name">
+                                <tr>
+                                    <td colspan="4"><strong>Test Name:</strong> <t t-esc="doc.test_name"/></td>
+                                </tr>
+                            </t>
+
+                            <!-- Patient Name & Gender -->
+                            <tr>
+                                <td><strong>Patient Name:</strong> <t t-esc="doc.patient_name"/></td>
+                                <td><strong>Gender:</strong> <t t-esc="doc.gender"/></td>
+                                <td><strong>Date of Birth:</strong> <t t-esc="doc.dob or 'N/A'"/></td>
+                                <td><strong>Capitalized Name:</strong> <t t-esc="doc.capitalized_name"/></td>
+                            </tr>
+
+                            <!-- Email & Phone -->
+                            <tr>
+                                <td><strong>Email:</strong> <t t-esc="doc.email"/></td>
+                                <td><strong>Phone:</strong> <t t-esc="doc.mobile or 'N/A'"/></td>
+                            </tr>
+
+                            <!-- Address (Full-Width) -->
+                            <tr>
+                                <td colspan="4"><strong>Address:</strong> <t t-esc="doc.address or 'N/A'"/></td>
+                            </tr>
+
+                        </table>
+                    </div> <!-- Closing .page div -->
+
+                </t> <!-- Closing t-foreach -->
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="sequence_hospital_patient" model="ir.sequence">
+            <field name="name">Hospital patient Sequence</field>
+            <field name="code">hospital.patient</field>
+            <field name="prefix">HP</field>
+            <field name="padding">5</field>
+        </record>
+
+
+        <record id="sequence_hospital_lab" model="ir.sequence">
+            <field name="name">Hospital lab Sequence</field>
+            <field name="code">hospital.lab</field>
+            <field name="prefix">HL</field>
+            <field name="padding">5</field>
+        </record>
+
+
+        <record id="sequence_hospital_doctor" model="ir.sequence">
+            <field name="name">Hospital Doctor Sequence</field>
+            <field name="code">hospital.doctor</field>
+            <field name="prefix">HD</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</odoo>
