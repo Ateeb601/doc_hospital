@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_hospital_account_form" model="ir.ui.view">
+        <field name="name">hospital.account.form</field>
+        <field name="model">hospital.account</field>
+        <field name="arch" type="xml">
+            <form string="Hospital Account">
+                <sheet>
+                    <group>
+                        <field name="account_currency"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_hospital_account_tree" model="ir.ui.view">
+        <field name="name">hospital.account.tree</field>
+        <field name="model">hospital.account</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="account_currency"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hospital_account" model="ir.actions.act_window">
+        <field name="name">Hospital Account</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.account</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Root Menu -->
+    <menuitem id="menu_hospital_account_root" name="Hospital Account" sequence="10"/>
+
+    <!-- Submenu for Hospital Account -->
+    <menuitem id="menu_hospital_account" name="Manage Accounts"
+              parent="menu_hospital_account_root" action="action_hospital_account" sequence="20"/>
+</odoo>

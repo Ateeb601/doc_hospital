@@ -11,6 +11,7 @@
         'views/hospital_lab.xml',
         'views/hospital_patient.xml',
         'views/hospital_doctor.xml',
+        'views/hospital_account_view.xml',
         'data/sequence.xml',
 
         'report/patient_card.xml',
