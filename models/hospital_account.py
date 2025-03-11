@@ -1,6 +1,6 @@
 from odoo import api, fields, models
 
-class HospitalAccount(models.TransientModel):
+class HospitalAccount(models.Model):
     _name = 'hospital.account'
     _description = 'Hospital Account'
 
