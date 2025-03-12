@@ -35,6 +35,7 @@ class HospitalPatient(models.Model):
 
     # Relationship fields
     lab_id = fields.Many2one('hospital.lab', string="Lab")  # Link to a lab record
+    test_name1 = fields.Char(string="Test Name", related='lab_id.test_name', store=True)
     tag_ids = fields.Many2many('res.partner.category', 'hospital_patient_tag_rel', 'patient_id',
                                string="Tags")  # Tags (categories)
     pharmacy_line_ids = fields.One2many('hospital.patient.pharmacy.line', 'patient_id',
