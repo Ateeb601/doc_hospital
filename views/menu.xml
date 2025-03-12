@@ -15,5 +15,17 @@
               parent="menu_hospital_main"
               sequence="20"/>
 
+    <!-- Specializations Submenu -->
+    <menuitem id="menu_hospital_specialization"
+              name="Specializations"
+              parent="menu_hospital_main"
+              sequence="30"/>
 
+    <!-- Doctor Submenu (Fixed Closing Tag) -->
+   <!-- Doctor Menu (Fixed) -->
+<menuitem id="menu_hospital_doctor"
+          name="Doctor"
+          parent="menu_hospital_main"
+          sequence="40"
+          />
 </odoo>

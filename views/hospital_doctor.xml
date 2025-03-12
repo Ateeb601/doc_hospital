@@ -7,11 +7,6 @@
         <field name="model">hospital.doctor</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <!-- Button to trigger Excel report generation -->
-                    <button name="print_excel" string="Print Excel Report" type="object" class="oe_highlight"/>
-                </header>
-
                 <sheet>
                     <div class="oe_title">
                         <h1>
@@ -24,11 +19,6 @@
                             <field name="name"/>
                             <field name="gender"/>
                             <field name="full_name" readonly="1"/>
-                        </group>
-                        <group>
-                            <field name="mobile"/>
-                            <field name="email"/>
-                            <field name="specialization"/>
                         </group>
                     </group>
 
@@ -48,13 +38,13 @@
                         <field name="parent_id"/>
                         <field name="child_ids" widget="many2many_tags" readonly="1"/>
                     </group>
-                </sheet>
 
-                <!-- Chatter Section (for messaging and followers if mail.thread is enabled on the model) -->
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
-                </div>
+                    <!-- Chatter Section (for messaging and followers if mail.thread is enabled on the model) -->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </sheet>
             </form>
         </field>
     </record>
@@ -67,15 +57,12 @@
             <tree>
                 <field name="ref"/>
                 <field name="name"/>
-                <field name="full_name"/>
+                <field name="full_name" readonly="1"/>
                 <field name="gender"/>
-                <field name="age"/>
-                <field name="doctor_type"/>
-                <field name="email"/>
-                <field name="specialization"/>
-                <field name="mobile"/>
+                <field name="age" readonly="1"/>
+                <field name="doctor_type" readonly="1"/>
                 <field name="currency_id"/>
-                <field name="retail_price"/>
+                <field name="retail_price" widget="monetary"/>
             </tree>
         </field>
     </record>
@@ -83,12 +70,14 @@
     <!-- ======================== Action for Hospital Doctor ======================== -->
     <record id="action_hospital_doctor" model="ir.actions.act_window">
         <field name="name">Doctor</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.doctor</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ======================== Menu Items ======================== -->
-    <menuitem id="menu_hospital_doctor_root" name="Doctor" sequence="10" action="action_hospital_doctor"/>
+<!-- ================================
+         Menu Item for Accessing Doctor
+         ================================ -->
+    <menuitem id="menu_doctor" name="Doctor" parent="menu_hospital_doctor" action="action_hospital_doctor"/>
+
 
 </odoo>
