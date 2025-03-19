@@ -3,7 +3,7 @@
     'author': 'odoo Mates',
     'website': 'www.odoomates.tech',
     'summary': 'odoo 16 Development',
-    'depends': ['mail', 'product', ],
+    'depends': ['mail', 'product', 'purchase'],
     'data': [
         'security/ir.model.access.csv',
         'views/menu.xml',
