@@ -1,5 +1,4 @@
 from odoo import api, fields, models
-
 from datetime import date
 
 
@@ -7,8 +6,6 @@ class HospitalDoctor(models.Model):
     _name = "hospital.doctor"
     _inherit = "mail.thread"
     _description = "Hospital Doctor"
-
-
 
     name = fields.Char(string="Doctor Name", required=True)
     gender = fields.Selection([
@@ -20,7 +17,7 @@ class HospitalDoctor(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency')
     retail_price = fields.Monetary('Charges')
 
-    ref = fields.Char(string="Reference Number", default=lambda self: 'New', copy=False)
+    ref = fields.Char(string="Reference", default=lambda self: 'New')
 
     # Date of Birth for Age Calculation
     dob = fields.Date(string='Date of Birth')
@@ -30,13 +27,15 @@ class HospitalDoctor(models.Model):
     doctor_type = fields.Char(string='Doctor Type', compute='_compute_doctor_type', store=True)
     full_name = fields.Char(string='Full Name', compute='_compute_full_name', store=True)
 
+    mobile = fields.Char(string="Mobile")  # Added missing mobile field
+
     # Hierarchy Fields (optional if you want hierarchy feature)
     parent_id = fields.Many2one('hospital.doctor', string='Supervisor', index=True)
     child_ids = fields.One2many('hospital.doctor', 'parent_id', string='Supervised Doctors')
     parent_path = fields.Char(index=True)
 
     # ================================
-       # SQL Constraints
+    # SQL Constraints
     # ================================
     _sql_constraints = [
         ('name_uniq', 'UNIQUE (name)', 'Doctor name must be unique.'),
@@ -65,3 +64,11 @@ class HospitalDoctor(models.Model):
     def _compute_full_name(self):
         for doctor in self:
             doctor.full_name = f"Dr. {doctor.name}" if doctor.name else ''
+
+    @api.model
+    def create(self, vals):
+        """
+        Override the create method to auto-generate reference number.
+        """
+        vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.doctor') or 'New'
+        return super(HospitalDoctor, self).create(vals)
