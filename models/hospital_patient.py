@@ -4,6 +4,10 @@ import base64  # For encoding Excel files to attach in Odoo
 from io import BytesIO  # To create file in memory
 from datetime import date  # To handle date calculations
 import re  # <-- Import regex module
+from odoo.exceptions import ValidationError
+
+
+
 
 class HospitalPatient(models.Model):
     _name = "hospital.patient"  # Defines the model name
@@ -68,10 +72,27 @@ class HospitalPatient(models.Model):
 
     @api.constrains('cnic')
     def _check_cnic_format(self):
-        """Ensure CNIC is exactly 13 digits and contains only numbers."""
+        """Ensure CNIC follows the format 12345-1234567-7."""
         for record in self:
-            if not record.cnic or not re.fullmatch(r'\d{13}', record.cnic):
-                raise ValueError("CNIC must be exactly 13 digits long and contain only numbers.")
+            if not record.cnic or not re.fullmatch(r'\d{5}-\d{7}-\d', record.cnic):
+                raise ValidationError("⚠️ CNIC must be in the format 12345-1234567-7.")
+
+    @api.onchange('cnic')
+    def _onchange_cnic(self):
+        """Automatically format CNIC to 12345-1234567-7 format."""
+        for record in self:
+            if record.cnic:
+                # Remove all non-numeric characters
+                digits = re.sub(r'\D', '', record.cnic)
+
+                # Apply formatting if length is sufficient
+                if len(digits) >= 13:
+                    record.cnic = f"{digits[:5]}-{digits[5:12]}-{digits[12]}"
+                elif len(digits) >= 5:
+                    record.cnic = f"{digits[:5]}-{digits[5:]}"
+                else:
+                    record.cnic = digits  # Show as is if less than 5 digits
+
 
     @api.model
     def search_patient_by_cnic(self, cnic_number):
