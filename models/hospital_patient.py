@@ -77,21 +77,7 @@ class HospitalPatient(models.Model):
             if not record.cnic or not re.fullmatch(r'\d{5}-\d{7}-\d', record.cnic):
                 raise ValidationError("⚠️ CNIC must be in the format 12345-1234567-7.")
 
-    @api.onchange('cnic')
-    def _onchange_cnic(self):
-        """Automatically format CNIC to 12345-1234567-7 format."""
-        for record in self:
-            if record.cnic:
-                # Remove all non-numeric characters
-                digits = re.sub(r'\D', '', record.cnic)
 
-                # Apply formatting if length is sufficient
-                if len(digits) >= 13:
-                    record.cnic = f"{digits[:5]}-{digits[5:12]}-{digits[12]}"
-                elif len(digits) >= 5:
-                    record.cnic = f"{digits[:5]}-{digits[5:]}"
-                else:
-                    record.cnic = digits  # Show as is if less than 5 digits
     @api.model
     def search_patient_by_cnic(self, cnic_number):
         """Search for a patient by CNIC number."""
