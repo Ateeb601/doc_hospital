@@ -3,7 +3,7 @@ import xlwt  # Library for generating Excel files
 import base64  # For encoding Excel files to attach in Odoo
 from io import BytesIO  # To create file in memory
 from datetime import date  # To handle date calculations
-
+import re  # <-- Import regex module
 
 class HospitalPatient(models.Model):
     _name = "hospital.patient"  # Defines the model name
@@ -58,7 +58,38 @@ class HospitalPatient(models.Model):
         ('valid_mobile', "CHECK (char_length(mobile) > 0)", 'Mobile number must not be empty.')
         # Ensures mobile number is not empty
     ]
+    # Adding the CNIC field
+    cnic = fields.Char(string="CNIC", required=True, tracking=True)
 
+    # SQL constraint to ensure CNIC is unique
+    _sql_constraints = [
+        ('cnic_uniq', 'UNIQUE (cnic)', 'CNIC must be unique.'),
+    ]
+
+    @api.constrains('cnic')
+    def _check_cnic_format(self):
+        """Ensure CNIC is exactly 13 digits and contains only numbers."""
+        for record in self:
+            if not record.cnic or not re.fullmatch(r'\d{13}', record.cnic):
+                raise ValueError("CNIC must be exactly 13 digits long and contain only numbers.")
+
+    @api.model
+    def search_patient_by_cnic(self, cnic_number):
+        """Search for a patient by CNIC number."""
+        patient = self.search([('cnic', '=', cnic_number)], limit=1)
+        if patient:
+            return {
+                'name': patient.name,
+                'age': patient.age,
+                'gender': patient.gender,
+                'mobile': patient.mobile,
+                'email': patient.email,
+                'address': patient.address,
+                'lab': patient.lab_id.name if patient.lab_id else 'N/A',
+                'total_products': patient.total_products,
+                'total_price': patient.total_price,
+            }
+        return {'error': 'No patient found with this CNIC'}
     # ========== Compute Functions ==========
     @api.depends('dob')
     def _compute_age(self):
