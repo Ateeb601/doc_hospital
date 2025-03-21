@@ -92,8 +92,6 @@ class HospitalPatient(models.Model):
                     record.cnic = f"{digits[:5]}-{digits[5:]}"
                 else:
                     record.cnic = digits  # Show as is if less than 5 digits
-
-
     @api.model
     def search_patient_by_cnic(self, cnic_number):
         """Search for a patient by CNIC number."""
