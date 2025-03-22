@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 from datetime import date
+import re  # <-- Import regex module
+from odoo.exceptions import ValidationError
 
 
 class HospitalDoctor(models.Model):
@@ -49,6 +51,23 @@ class HospitalDoctor(models.Model):
     def _compute_doctor_type(self):
         for doctor in self:
             doctor.doctor_type = 'Senior' if doctor.name and len(doctor.name) > 10 else 'Junior'
+
+        # Adding the CNIC field
+
+    cnic = fields.Char(string="CNIC", required=True, tracking=True)
+
+    # SQL constraint to ensure CNIC is unique
+    _sql_constraints = [
+        ('cnic_uniq', 'UNIQUE (cnic)', 'CNIC must be unique.'),
+    ]
+
+    @api.constrains('cnic')
+    def _check_cnic_format(self):
+        """Ensure CNIC follows the format 12345-1234567-7."""
+        for record in self:
+            if not record.cnic or not re.fullmatch(r'\d{5}-\d{7}-\d', record.cnic):
+                raise ValidationError("⚠️ CNIC must be in the format 12345-1234567-7.")
+
 
     @api.depends('dob')
     def _compute_age(self):
