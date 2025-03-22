@@ -26,6 +26,11 @@
 <menuitem id="menu_hospital_doctor"
           name="Doctor"
           parent="menu_hospital_main"
-          sequence="40"
-          />
+          sequence="40"/>
+
+
+    <menuitem id="menu_hospital_teacher"
+              name="Teacher"
+              parent="menu_hospital_main"
+              sequence="50"/>
 </odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Report Template -->
+    <template id="report_hospital_teacher">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <h2 style="text-align: center; margin-bottom: 20px;">Hospital Teacher Report</h2>
+
+                        <table class="table table-bordered"
+                               style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid black;">
+                                        <strong>Teacher Name:</strong>
+                                    </td>
+                                    <td style="padding: 8px; border: 1px solid black;">
+                                        <t t-esc="doc.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid black;">
+                                        <strong>Reference:</strong>
+                                    </td>
+                                    <td style="padding: 8px; border: 1px solid black;">
+                                        <t t-esc="doc.ref"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>  <!-- Closing t-foreach -->
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -23,5 +23,12 @@
             <field name="prefix">HD</field>
             <field name="padding">5</field>
         </record>
+
+         <record id="sequence_hospital_teacher" model="ir.sequence">
+            <field name="name">Hospital Teacher Sequence</field>
+            <field name="code">hospital.teacher</field>
+            <field name="prefix">HT</field>
+            <field name="padding">5</field>
+        </record>
     </data>
 </odoo>

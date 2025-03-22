@@ -13,13 +13,16 @@
         'views/hospital_doctor.xml',
         'views/hospital_account_view.xml',
         'views/hospital_specialization.xml',
+        'views/hospital_teacher.xml',
+        'views/my_wizard_views.xml',
 
         'data/sequence.xml',
 
         'report/patient_card.xml',
         'report/lab_card.xml',
         'report/doctor_card.xml',
-        'report/report.xml'
+        'report/report.xml',
+        'report/report_hospital_teacher.xml'
 
     ],
     'installable': True,

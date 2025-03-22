@@ -27,5 +27,16 @@
                 name="doc_hospital.report_doctor"
                 file="doc_hospital.report_doctor"
         />
+
+        <odoo>
+            <record id="action_report_practice" model="ir.actions.report">
+                <field name="name">Hospital Teacher Report</field>
+                <field name="model">hospital.teacher</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="report_name">doc_hospital.report_hospital_teacher</field>
+                <field name="print_report_name">'Hospital_Teacher_Report_' + (object.name or '')</field>
+            </record>
+        </odoo>
+
     </data>
 </odoo>

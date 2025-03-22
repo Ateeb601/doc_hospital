@@ -8,3 +8,6 @@ access_hospital_doctor_user,hospital_doctor_user,model_hospital_doctor,,1,1,1,1
 access_hospital_specialization_user,Hospital Specialization User,model_hospital_specialization,base.group_user,1,0,0,0
 access_hospital_specialization_manager,Hospital Specialization Manager,model_hospital_specialization,base.group_system,1,1,1,1
 access_hospital_account,access_hospital_account,model_hospital_account,,1,1,1,1
+
+access_hospital_teacher,access_hospital_teacher,model_hospital_teacher,base.group_user,1,1,1,1
+access_my_wizard,access_my_wizard,model_my_wizard,base.group_user,1,1,1,1
