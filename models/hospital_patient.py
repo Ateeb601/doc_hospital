@@ -38,7 +38,7 @@ class HospitalPatient(models.Model):
     address = fields.Char(string='Address', required=True, tracking=True)  # Address (tracked)
     amount = fields.Integer(string="Amount", tracking=True)  # Amount field (not clear in usage)
 
-    # ========== Lab Information ==========
+    # ========== Lab Information Exposing related fields stored in other models ==========
     lab_id = fields.Many2one('hospital.lab', string="Lab")  # Links the patient to a lab
     test_name1 = fields.Char(string="Test Name", related='lab_id.test_name',
                              store=True)  # Retrieves test name from lab record

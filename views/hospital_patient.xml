@@ -84,6 +84,7 @@
                         </page>
                     </notebook>
 
+
                     <!-- Chatter widget for tracking messages and followers -->
                     <div class="oe_chatter">
                         <field name="message_follower_ids"/>   <!-- Followers of the record -->
