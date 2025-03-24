@@ -38,6 +38,18 @@ class HospitalPatient(models.Model):
     address = fields.Char(string='Address', required=True, tracking=True)  # Address (tracked)
     amount = fields.Integer(string="Amount", tracking=True)  # Amount field (not clear in usage)
 
+
+
+    document = fields.Reference(selection="_referencable_models", string="Related Document")
+
+    @api.model
+    def _referencable_models(self):
+        """Jo models messaging support karte hain, unki list dynamically return karega"""
+        return [(model.model, model.name) for model in self.env['ir.model'].search([('is_mail_thread', '=', True)])]
+
+
+
+
     # ========== Lab Information Exposing related fields stored in other models ==========
     lab_id = fields.Many2one('hospital.lab', string="Lab")  # Links the patient to a lab
     test_name1 = fields.Char(string="Test Name", related='lab_id.test_name',

@@ -36,6 +36,7 @@
                             <field name="gender"/>   <!-- Gender selection -->
                             <field name="mobile"/>   <!-- Patient mobile number -->
                             <field name="email"/>   <!-- Patient email -->
+                             <field name="document"/>
                         </group>
                     </group>
 
