@@ -38,6 +38,21 @@ class HospitalPatient(models.Model):
     address = fields.Char(string='Address', required=True, tracking=True)  # Address (tracked)
     amount = fields.Integer(string="Amount", tracking=True)  # Amount field (not clear in usage)
 
+    def log_all_patient_members(self):
+        """
+        This function retrieves all records of the 'hospital.teacher' model
+        and prints them in the terminal.
+        """
+        # Get the model 'hospital.teacher'
+        patient_member_model = self.env['hospital.teacher']
+
+        # Fetch all records from 'hospital.teacher'
+        all_members = patient_member_model.search([])
+
+        # Print the retrieved records in the terminal
+        print("ALL MEMBERS:", all_members)
+
+        return True  # Return True after execution
 
 
     document = fields.Reference(selection="_referencable_models", string="Related Document")
