@@ -81,6 +81,9 @@ class HospitalPatient(models.Model):
         ('cnic_uniq', 'UNIQUE (cnic)', 'CNIC must be unique.'),
     ]
 
+
+
+
     @api.constrains('cnic')
     def _check_cnic_format(self):
         """Ensure CNIC follows the format 12345-1234567-7."""
