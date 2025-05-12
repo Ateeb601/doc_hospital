@@ -9,7 +9,9 @@ class HospitalLab(models.Model):
 
     # Fields
     test_name = fields.Char(string="Test Name")
-    name = fields.Char(string="Lab Name", required=True)
+
+    name = fields.Char("Lab Name")
+    active = fields.Boolean(string="Active", default=True)
     patient_name = fields.Char(string="Patient Name", required=True)
     gender = fields.Selection([
         ('male', 'Male'),

@@ -1,87 +1,90 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ================================
-         Form View for Hospital Patient
-         ================================ -->
+    <!-- Form View for Hospital Patient -->
     <record id="view_hospital_patient_form" model="ir.ui.view">
         <field name="name">hospital.patient.form</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button type="object" name="log_patient_menu"
+                            string="Patient Menu"
+                            class="btn-primary"/>
                     <button name="log_all_patient_members"
                             string="Log All Teachers"
                             type="object"
                             class="btn-primary"/>
-                    <!-- Button to trigger the "print_excel" function to generate an Excel report -->
                     <button name="print_excel" string="Print Excel Report" type="object" class="oe_highlight"/>
                 </header>
+
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <!-- Display the patient reference number as a title, which is read-only -->
                             <field name="ref" readonly="1"/>
                         </h1>
                     </div>
 
-                    <!-- Grouping patient details -->
+                    <!-- Add fields that conditionally appear -->
+                    <group>
+                        <field name="show_fields" invisible="1"/>
+                        <field name="field_one" attrs="{'invisible': [('show_fields', '=', False)]}"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                    </group>
+
+                    <!-- Main Patient Info -->
                     <group>
                         <group>
-                            <field name="name"/>   <!-- Patient name -->
+                            <field name="name"/>
                             <field name="cnic" placeholder="Enter 13-digit CNIC 12345-1234567-7"
                                    attrs="{'required': [('cnic', '!=', False)]}"/>
-                            <field name="test_name1"/>   <!-- Patient name -->
-                            <field name="is_child"/>   <!-- Checkbox indicating if the patient is a child -->
+                            <field name="test_name1"/>
+                            <field name="is_child"/>
                             <field name="dob"/>
                             <field name="age" readonly="1"/>
                         </group>
                         <group>
-                            <field name="gender"/>   <!-- Gender selection -->
-                            <field name="mobile"/>   <!-- Patient mobile number -->
-                            <field name="email"/>   <!-- Patient email -->
+                            <field name="gender"/>
+                            <field name="mobile"/>
+                            <field name="email"/>
                             <field name="document"/>
                         </group>
                     </group>
 
-                    <!-- Additional patient details -->
+                    <!-- Additional Details -->
                     <group>
                         <group>
-                            <field name="address"/>   <!-- Patient address -->
-                            <field name="amount"/>   <!-- Amount field (possibly billing amount) -->
+                            <field name="address"/>
+                            <field name="amount"/>
                         </group>
                         <group>
-                            <field name="capitalized_name" readonly="1"/>  <!-- Auto-generated capitalized name -->
-                            <field name="lab_id"/>   <!-- Many2one field linking the patient to a lab -->
-                            <field name="tag_ids" widget="many2many_tags"/>   <!-- Many2many field for patient tags -->
+                            <field name="capitalized_name" readonly="1"/>
+                            <!-- Domain filter example: show only labs that are active -->
+                            <field name="lab_id" domain="[('active', '=', True)]"/>
                         </group>
                     </group>
 
-                    <!-- Notebook widget to manage multiple tabs -->
+                    <!-- Notebook Tabs -->
                     <notebook>
-                        <!-- Pharmacy tab to manage prescribed medications -->
                         <page string="Pharmacy">
                             <group>
                                 <field name="pharmacy_line_ids">
-                                    <!-- Tree view for adding/editing pharmacy lines -->
                                     <tree editable="bottom">
-                                        <field name="product_id"/>   <!-- Product field -->
-                                        <field name="qty"/>   <!-- Quantity of the product -->
-                                        <field name="price_unit"/>   <!-- Price per unit -->
+                                        <field name="product_id"/>
+                                        <field name="qty"/>
+                                        <field name="price_unit"/>
                                     </tree>
-                                    <!-- Form view for pharmacy line details -->
                                     <form>
                                         <group>
                                             <field name="product_id"/>
                                             <field name="qty"/>
                                             <field name="price_unit"/>
-                                            <field name="tag_id"/>   <!-- Optional tag for medication classification -->
+                                            <field name="tag_id"/>
                                         </group>
                                     </form>
                                 </field>
                             </group>
                             <group>
-                                <!-- Display total products, quantity, and price -->
                                 <field name="total_products" readonly="1"/>
                                 <field name="total_quantity" readonly="1"/>
                                 <field name="total_price" readonly="1"/>
@@ -89,76 +92,76 @@
                         </page>
                     </notebook>
 
-
-                    <!-- Chatter widget for tracking messages and followers -->
+                    <!-- Chatter -->
                     <div class="oe_chatter">
-                        <field name="message_follower_ids"/>   <!-- Followers of the record -->
-                        <field name="message_ids" widget="mail_thread"/>   <!-- Message history -->
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
                     </div>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- ================================
-         Tree View (List View) for Patients
-         ================================ -->
+    <!-- Tree View -->
     <record id="view_hospital_patient_tree" model="ir.ui.view">
         <field name="name">hospital.patient.tree</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="ref"/>   <!-- Patient reference number -->
+            <tree
+                decoration-bf="cnic &gt; 0"
+                decoration-danger="age &gt; 24"
+                decoration-warning="mobile &gt; 0">
+                <field name="ref"/>
                 <field name="cnic"/>
-                <field name="name"/>   <!-- Patient name -->
+                <field name="name"/>
                 <field name="age" readonly="1"/>
                 <field name="dob"/>
-                <field name="gender"/>   <!-- Gender -->
-                <field name="mobile"/>   <!-- Mobile number -->
-                <field name="email"/>   <!-- Email -->
-                <field name="address"/>   <!-- Address -->
-                <field name="amount"/>   <!-- Billing amount -->
-                <field name="capitalized_name"/>   <!-- Capitalized name (computed field) -->
+                <field name="gender"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="address"/>
+                <field name="amount"/>
+                <field name="capitalized_name"/>
             </tree>
         </field>
     </record>
 
-    <!-- ================================
-         Search View for Hospital Patients
-         ================================ -->
-    <!--    <record id="view_hospital_patient_search" model="ir.ui.view">-->
-    <!--        <field name="name">hospital.patient.search</field>-->
-    <!--        <field name="model">hospital.patient</field>-->
-    <!--        <field name="arch" type="xml">-->
-    <!--            <search>-->
-    <!--                &lt;!&ndash; Fields that can be searched &ndash;&gt;-->
-    <!--                <field name="ref"/>-->
-    <!--                <field name="name"/>-->
-    <!--                <field name="cnic"/>  &lt;!&ndash; New CNIC field &ndash;&gt;-->
-    <!--                <field name="age"/>-->
-    <!--                <field name="gender"/>-->
-    <!--                <field name="mobile"/>-->
-    <!--                <field name="email"/>-->
-    <!--                <field name="address"/>-->
-    <!--                <field name="dob"/>-->
-    <!--                <field name="amount"/>-->
-    <!--                <field name="capitalized_name"/>-->
-    <!--            </search>-->
-    <!--        </field>-->
-    <!--    </record>-->
+    <!-- Search View with Filters -->
+    <record id="view_hospital_patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Adults Only" name="filter_adults" domain="[('age', '>=', 18)]"/>
+                <filter string="Children Only" name="filter_children" domain="[('is_child', '=', True)]"/>
+                <filter string="High Amount" name="filter_high_amount" domain="[('amount', '>', 1000)]"/>
+                <filter string="Male" name="filter_male" domain="[('gender', '=', 'male')]"/>
+                <filter string="Female" name="filter_female" domain="[('gender', '=', 'female')]"/>
+                <field name="ref"/>
+                <field name="name"/>
+                <field name="cnic"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="address"/>
+                <field name="dob"/>
+                <field name="amount"/>
+                <field name="capitalized_name"/>
+            </search>
+        </field>
+    </record>
 
-    <!-- ================================
-         Window Action to Open Patient Views
-         ================================ -->
+    <!-- Action -->
     <record id="action_hospital_patient" model="ir.actions.act_window">
         <field name="name">Patients</field>
         <field name="res_model">hospital.patient</field>
-        <field name="view_mode">tree,form</field>  <!-- Opens both tree and form views -->
+        <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ================================
-         Menu Item for Accessing Patients
-         ================================ -->
+    <!-- Menu Item -->
     <menuitem id="menu_patients" name="Patients" parent="menu_hospital_operations" action="action_hospital_patient"/>
+
+
 
 </odoo>

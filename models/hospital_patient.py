@@ -38,6 +38,15 @@ class HospitalPatient(models.Model):
     address = fields.Char(string='Address', required=True, tracking=True)  # Address (tracked)
     amount = fields.Integer(string="Amount", tracking=True)  # Amount field (not clear in usage)
 
+
+    show_fields = fields.Boolean(string="Show Fields", default=False)
+    field_one = fields.Char(string="Field One")
+
+
+    def log_patient_menu(self):
+        self.write({'show_fields': True})
+
+
     def log_all_patient_members(self):
         """
         This function retrieves all records of the 'hospital.teacher' model

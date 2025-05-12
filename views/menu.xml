@@ -3,31 +3,26 @@
     <!-- Root Menu for Hospital -->
     <menuitem id="menu_hospital_main" name="Hospital" sequence="1"/>
 
-    <!-- Operations Submenu -->
+    <!-- All Submenus under Hospital -->
     <menuitem id="menu_hospital_operations"
               name="Operations"
               parent="menu_hospital_main"
               sequence="10"/>
 
-    <!-- Lab Submenu -->
     <menuitem id="menu_hospital_lab"
               name="Lab"
               parent="menu_hospital_main"
               sequence="20"/>
 
-    <!-- Specializations Submenu -->
     <menuitem id="menu_hospital_specialization"
               name="Specializations"
               parent="menu_hospital_main"
               sequence="30"/>
 
-    <!-- Doctor Submenu (Fixed Closing Tag) -->
-   <!-- Doctor Menu (Fixed) -->
-<menuitem id="menu_hospital_doctor"
-          name="Doctor"
-          parent="menu_hospital_main"
-          sequence="40"/>
-
+    <menuitem id="menu_hospital_doctor"
+              name="Doctor"
+              parent="menu_hospital_main"
+              sequence="40"/>
 
     <menuitem id="menu_hospital_teacher"
               name="Teacher"
