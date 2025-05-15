@@ -10,6 +10,9 @@ class HospitalDoctor(models.Model):
     _description = "Hospital Doctor"
 
     name = fields.Char(string="Doctor Name", required=True)
+    email = fields.Char(string="Email")
+    specialization = fields.Many2one('hospital.specialization', string="Specialization")
+
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
