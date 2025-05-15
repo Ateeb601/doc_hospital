@@ -39,9 +39,7 @@
         <field name="view_id" ref="view_hospital_specialization_tree"/>
     </record>
 
-    <!-- Root Menu -->
-    <menuitem id="menu_hospital_root" name="Hospital" sequence="10"/>
-
-    <!-- Specializations Menu -->
+   <!-- Root Menu -->
+    <menuitem id="menu_hospital_root" name="Senior Doctor" parent="menu_hospital_specialization" action="action_hospital_specialization" sequence="10"/>
 
 </odoo>

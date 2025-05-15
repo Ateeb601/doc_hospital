@@ -36,10 +36,6 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Root Menu -->
-    <menuitem id="menu_hospital_account_root" name="Hospital Account" sequence="10"/>
+        <menuitem id="menu_hospital_root" name="Account" parent="menu_hospital_account" action="action_hospital_account" sequence="10"/>
 
-    <!-- Submenu for Hospital Account -->
-    <menuitem id="menu_hospital_account" name="Manage Accounts"
-              parent="menu_hospital_account_root" action="action_hospital_account" sequence="20"/>
 </odoo>

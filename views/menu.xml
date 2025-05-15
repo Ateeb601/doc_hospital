@@ -28,4 +28,12 @@
               name="Teacher"
               parent="menu_hospital_main"
               sequence="50"/>
+    <menuitem id="menu_hospital_account"
+              name="Account"
+              parent="menu_hospital_main"
+              sequence="60"/>
+    <menuitem id="menu_time_complexity"
+              name="Time Complexity"
+              parent="menu_hospital_main"
+              sequence="70"/>
 </odoo>
