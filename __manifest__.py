@@ -3,6 +3,7 @@
     'author': 'odoo Mates',
     'website': 'www.odoomates.tech',
     'summary': 'odoo 16 Development',
+    'category': 'Hospital',
     'depends': ['mail', 'product', 'purchase'],
     'data': [
         'security/security.xml',
