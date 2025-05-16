@@ -38,6 +38,9 @@ class HospitalPatient(models.Model):
     address = fields.Char(string='Address', required=True, tracking=True)  # Address (tracked)
     amount = fields.Integer(string="Amount", tracking=True)  # Amount field (not clear in usage)
 
+    is_public = fields.Boolean(groups='doc_hospital.group_hospital_patient')
+    private_notes = fields.Text(groups='doc_hospital.group_hospital_patient')
+
 
     show_fields = fields.Boolean(string="Show Fields", default=False)
     field_one = fields.Char(string="Field One")

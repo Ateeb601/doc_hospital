@@ -15,3 +15,7 @@ access_my_wizard,access_my_wizard,model_my_wizard,base.group_user,1,1,1,1
 
 access_hospital_user,hospital.patient,model_hospital_patient,doc_hospital.group_hospital_user,1,1,0,0
 access_hospital_manager,hospital.patient,model_hospital_patient,doc_hospital.group_hospital_manager,1,1,1,1
+
+
+access_hospital_patient_user,access.hospital.patient.user,model_hospital_patient,base.group_user,1,0,0,0
+access_hospital_patient_admin,access.hospital.patient.admin,model_hospital_patient,base.group_system,1,1,1,1

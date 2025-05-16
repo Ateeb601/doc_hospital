@@ -56,6 +56,8 @@
                         <group>
                             <field name="address"/>
                             <field name="amount"/>
+                            <field name="is_public"/>
+                            <field name="private_notes"/>
                         </group>
                         <group>
                             <field name="capitalized_name" readonly="1"/>
@@ -108,9 +110,9 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <tree
-                decoration-bf="cnic &gt; 0"
-                decoration-danger="age &gt; 24"
-                decoration-warning="mobile &gt; 0">
+                    decoration-bf="cnic &gt; 0"
+                    decoration-danger="age &gt; 24"
+                    decoration-warning="mobile &gt; 0">
                 <field name="ref"/>
                 <field name="cnic"/>
                 <field name="name"/>
@@ -122,6 +124,8 @@
                 <field name="address"/>
                 <field name="amount"/>
                 <field name="capitalized_name"/>
+                <field name="is_public"/>
+                <field name="private_notes"/>
             </tree>
         </field>
     </record>
@@ -161,7 +165,6 @@
 
     <!-- Menu Item -->
     <menuitem id="menu_patients" name="Patients" parent="menu_hospital_operations" action="action_hospital_patient"/>
-
 
 
 </odoo>
