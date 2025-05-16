@@ -11,3 +11,10 @@ access_hospital_account,access_hospital_account,model_hospital_account,,1,1,1,1
 
 access_hospital_teacher,access_hospital_teacher,model_hospital_teacher,base.group_user,1,1,1,1
 access_my_wizard,access_my_wizard,model_my_wizard,base.group_user,1,1,1,1
+
+
+access_hospital_patient_admin,hospital.patient admin,model_hospital_patient,group_hospital_admin,1,1,1,1
+access_hospital_doctor_admin,hospital.doctor admin,model_hospital_doctor,group_hospital_admin,1,1,1,1
+
+access_patient_receptionist,hospital.patient receptionist,model_hospital_patient,group_hospital_receptionist,1,1,1,0
+access_doctor_doctor,hospital.doctor doctor,model_hospital_doctor,group_hospital_doctor,1,1,0,0

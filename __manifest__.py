@@ -5,6 +5,7 @@
     'summary': 'odoo 16 Development',
     'depends': ['mail', 'product', 'purchase'],
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/menu.xml',
         'views/time_complexity.xml',
