@@ -1,31 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+    <!-- Module Category -->
+    <record id="module_category_doc_hospital" model="ir.module.category">
+        <field name="name">Patient Management</field>
+        <field name="description">Manage Patient-related Records</field>
+        <field name="sequence">10</field>
+    </record>
 
-        <!-- Hospital User Group -->
-        <record id="group_hospital_user" model="res.groups">
-            <field name="name">Hospital User</field>
-            <field name="category_id" ref="base.module_category_hospital"/>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-        </record>
+    <!-- Groups -->
+    <record id="group_patient_user" model="res.groups">
+        <field name="name">Patient User</field>
+        <field name="category_id" ref="doc_hospital.module_category_doc_hospital"/>
+    </record>
 
-        <!-- Hospital Manager Group (inherits from User) -->
-        <record id="group_hospital_manager" model="res.groups">
-            <field name="name">Hospital Manager</field>
-            <field name="category_id" ref="base.module_category_hospital"/>
-            <field name="implied_ids" eval="[(4, ref('doc_hospital.group_hospital_user'))]"/>
-            <field name="users" eval="[(4, ref('base.user_admin'))]"/>
-        </record>
+    <record id="group_patient_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="doc_hospital.module_category_doc_hospital"/>
+    </record>
 
-        <record id="access_ir_model_custom" model="ir.model.access">
-            <field name="name">access.ir.model.custom</field>
-            <field name="model_id" ref="base.model_ir_model"/>
-            <field name="group_id" ref="base.group_system"/>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_write" eval="1"/>
-            <field name="perm_create" eval="1"/>
-            <field name="perm_unlink" eval="0"/>
-        </record>
+    <record id="group_patient_readonly" model="res.groups">
+        <field name="name">Patient Read-Only</field>
+        <field name="category_id" ref="doc_hospital.module_category_doc_hospital"/>
+    </record>
 
-
-    </data>
 </odoo>
+<!--<odoo>-->
+<!--    <data noupdate="1">-->
+
+<!--        &lt;!&ndash; Admin group &ndash;&gt;-->
+<!--        <record id="group_hospital_admin" model="res.groups">-->
+<!--            <field name="name">Hospital Admin</field>-->
+<!--            <field name="category_id" ref="base.module_category_hidden"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Doctor group &ndash;&gt;-->
+<!--        <record id="group_hospital_doctor" model="res.groups">-->
+<!--            <field name="name">Hospital Doctor</field>-->
+<!--            <field name="category_id" ref="base.module_category_hidden"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Receptionist group &ndash;&gt;-->
+<!--        <record id="group_hospital_receptionist" model="res.groups">-->
+<!--            <field name="name">Hospital Receptionist</field>-->
+<!--            <field name="category_id" ref="base.module_category_hidden"/>-->
+<!--        </record>-->
+
+<!--    </data>-->
+<!--</odoo>-->
+
