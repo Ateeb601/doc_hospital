@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Student User: Read-Only Access -->
+    <record id="access_patient_user_tree" model="ir.model.access">
+        <field name="name">Patient User Tree Access</field>
+        <field name="model_id" ref="doc_hospital.model_hospital_patient"/>
+        <field name="group_id" ref="doc_hospital.group_patient_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
 
+    <!-- Student Manager: Full Access -->
+    <record id="access_patient_manager_tree" model="ir.model.access">
+        <field name="name">Manager Tree Access</field>
+        <field name="model_id" ref="doc_hospital.model_hospital_patient"/>
+        <field name="group_id" ref="doc_hospital.group_patient_manager"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Fixed: Group Reference -->
+    <record id="patient_record_rule_readonly" model="ir.rule">
+        <field name="name">Patient Read-Only Rule</field>
+        <field name="model_id" ref="doc_hospital.model_hospital_patient"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="global" eval="False"/>
+        <field name="groups"
+               eval="[(4, ref('doc_hospital.group_patient_readonly')), (4, ref('doc_hospital.group_patient_user'))]"/>
+    </record>
     <!-- Form View for Hospital Patient -->
     <record id="view_hospital_patient_form" model="ir.ui.view">
         <field name="name">hospital.patient.form</field>
@@ -56,8 +86,6 @@
                         <group>
                             <field name="address"/>
                             <field name="amount"/>
-                            <field name="is_public"/>
-                            <field name="private_notes"/>
                         </group>
                         <group>
                             <field name="capitalized_name" readonly="1"/>
@@ -124,8 +152,6 @@
                 <field name="address"/>
                 <field name="amount"/>
                 <field name="capitalized_name"/>
-                <field name="is_public"/>
-                <field name="private_notes"/>
             </tree>
         </field>
     </record>
