@@ -14,19 +14,18 @@
                         </h1>
                     </div>
 
-                    <group>
                         <group>
                             <field name="name"/>
                              <field name="cnic" placeholder="Enter 13-digit CNIC 12345-1234567-7"
                                attrs="{'required': [('cnic', '!=', False)]}"/>
-                            <field name="gender"/>
+
                             <field name="full_name" readonly="1"/>
                         </group>
-                    </group>
 
-                    <group>
+
                         <group>
                             <field name="dob"/>
+                            <field name="gender"/>
                             <field name="age" readonly="1"/>
                         </group>
                         <group>
@@ -34,7 +33,6 @@
                             <field name="currency_id"/>
                             <field name="retail_price"/>
                         </group>
-                    </group>
 
                     <group string="Hierarchy">
                         <field name="parent_id"/>
