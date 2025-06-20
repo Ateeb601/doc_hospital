@@ -14,32 +14,31 @@
                         </h1>
                     </div>
 
-                        <group>
-                            <field name="name"/>
-                             <field name="cnic" placeholder="Enter 13-digit CNIC 12345-1234567-7"
+                    <!-- Group: Personal Information -->
+                    <group string="Personal Information" col="2">
+                        <field name="name"/>
+                        <field name="cnic" placeholder="Enter 13-digit CNIC 12345-1234567-7"
                                attrs="{'required': [('cnic', '!=', False)]}"/>
+                        <field name="full_name" readonly="1"/>
+                        <field name="dob"/>
+                        <field name="gender"/>
+                        <field name="age" readonly="1"/>
+                    </group>
 
-                            <field name="full_name" readonly="1"/>
-                        </group>
+                    <!-- Group: Professional Details -->
+                    <group string="Professional Details" col="2">
+                        <field name="doctor_type" readonly="1"/>
+                        <field name="currency_id"/>
+                        <field name="retail_price"/>
+                    </group>
 
-
-                        <group>
-                            <field name="dob"/>
-                            <field name="gender"/>
-                            <field name="age" readonly="1"/>
-                        </group>
-                        <group>
-                            <field name="doctor_type" readonly="1"/>
-                            <field name="currency_id"/>
-                            <field name="retail_price"/>
-                        </group>
-
-                    <group string="Hierarchy">
+                    <!-- Group: Hierarchy -->
+                    <group string="Hierarchy" col="2">
                         <field name="parent_id"/>
                         <field name="child_ids" widget="many2many_tags" readonly="1"/>
                     </group>
 
-                    <!-- Chatter Section (for messaging and followers if mail.thread is enabled on the model) -->
+                    <!-- Chatter Section -->
                     <div class="oe_chatter">
                         <field name="message_follower_ids"/>
                         <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
@@ -57,7 +56,7 @@
             <tree>
                 <field name="ref"/>
                 <field name="name"/>
-                 <field name="cnic"/>
+                <field name="cnic"/>
                 <field name="full_name" readonly="1"/>
                 <field name="gender"/>
                 <field name="age" readonly="1"/>
@@ -75,10 +74,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-<!-- ================================
-         Menu Item for Accessing Doctor
-         ================================ -->
+    <!-- ======================== Menu Item for Doctor ======================== -->
     <menuitem id="menu_doctor" name="Doctor" parent="menu_hospital_doctor" action="action_hospital_doctor"/>
-
 
 </odoo>
